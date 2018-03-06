@@ -42,6 +42,10 @@ _**E-mail**: wisdomtool@outlook.com_
 
 ![image](https://github.com/wisdomtool/rest-client/blob/master/images/Image_8.png)
 
+![image](https://github.com/wisdomtool/rest-client/blob/master/images/Image_9.png)
+
+![image](https://github.com/wisdomtool/rest-client/blob/master/images/Image_10.png)
+
 # Donations
 如果 **WisdomTool REST Client** 工具对您帮助很大，并且您很愿意支持工具的后续开发和维护，您可以扫下方二维码随意打赏，就当是请我喝杯茶或是咖啡，将不胜感激。 **♥ 谢谢 ♥**
 
