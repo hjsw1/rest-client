@@ -37,7 +37,7 @@ import org.wisdom.tool.gui.util.UIUtil;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-22 PM 10:42:57 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class AboutDialog extends JDialog implements ActionListener
 {
@@ -47,7 +47,7 @@ public class AboutDialog extends JDialog implements ActionListener
     {
         this.init();
     }
-   
+
     /**
     * 
     * @Title: init 
@@ -58,7 +58,7 @@ public class AboutDialog extends JDialog implements ActionListener
      */
     private void init()
     {
-        this.setTitle("About Tool");
+        this.setTitle(RESTConst.ABOUT_TOOL);
         this.setLayout(new BorderLayout(RESTConst.BORDER_WIDTH, RESTConst.BORDER_WIDTH));
 
         JPanel pnlDialog = new JPanel();
@@ -78,19 +78,19 @@ public class AboutDialog extends JDialog implements ActionListener
         tp.setText(UIUtil.contents(RESTConst.WISDOM_TOOL_ORG));
         pnlCenter.add(new JScrollPane(tp));
         pnlDialog.add(pnlCenter, BorderLayout.CENTER);
+
         JPanel pnlSouth = new JPanel();
         pnlSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton btnOK = new JButton(RESTConst.OK);
         btnOK.addActionListener(this);
-        
+        btnOK.requestFocus();
         getRootPane().setDefaultButton(btnOK);
         pnlSouth.add(btnOK);
         pnlDialog.add(pnlSouth, BorderLayout.SOUTH);
 
         this.setContentPane(pnlDialog);
-        pack();
-        btnOK.requestFocus();
         this.setIconImage(UIUtil.getImage(RESTConst.LOGO));
+        this.pack();
     }
 
     public void actionPerformed(ActionEvent arg0)

@@ -37,7 +37,7 @@ import org.wisdom.tool.gui.util.UIUtil;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-22 PM 10:42:57 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class DonateDialog extends JDialog implements ActionListener
 {
@@ -86,15 +86,15 @@ public class DonateDialog extends JDialog implements ActionListener
         pnlSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton btnOK = new JButton(RESTConst.OK);
         btnOK.addActionListener(this);
-
+        btnOK.requestFocus();
+        
         getRootPane().setDefaultButton(btnOK);
         pnlSouth.add(btnOK);
         pnlDialog.add(pnlSouth, BorderLayout.SOUTH);
 
         this.setContentPane(pnlDialog);
-        pack();
-        btnOK.requestFocus();
         this.setIconImage(UIUtil.getImage(RESTConst.LOGO));
+        this.pack();
     }
 
     public void actionPerformed(ActionEvent arg0)

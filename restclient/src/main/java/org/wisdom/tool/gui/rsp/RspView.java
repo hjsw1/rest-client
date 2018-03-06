@@ -104,7 +104,6 @@ public class RspView extends JPanel
         tp.add(RESTConst.RAW, pnlRaw);
 
         this.add(tp, BorderLayout.CENTER);
-        
         this.setBorder(BorderFactory.createTitledBorder(null, RESTConst.HTTP_RESPONSE, TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
     }
 
@@ -144,9 +143,9 @@ public class RspView extends JPanel
         pnlBody.getTxtAra().setText(rsp.getBody());
 
         // Set headers
+        pnlHdr.getTabMdl().clear();
         if (MapUtils.isNotEmpty(rsp.getHeaders()))
         {
-            pnlHdr.getTabMdl().clear();
             Set<Entry<String, String>> es = rsp.getHeaders().entrySet();
             for (Entry<String, String> e : es)
             {

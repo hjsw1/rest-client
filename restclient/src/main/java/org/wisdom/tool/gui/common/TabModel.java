@@ -35,11 +35,13 @@ import org.apache.commons.collections.MapUtils;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-22 PM 10:42:57 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class TabModel extends AbstractTableModel
 {
     private static final long serialVersionUID = 69634209639612612L;
+
+    private boolean editable = true;
 
     private List<String> colNames = null;
 
@@ -98,9 +100,41 @@ public class TabModel extends AbstractTableModel
         fireTableCellUpdated(row, col);
     }
 
+    public void setRowValues(List<Object> values, int row)
+    {
+        if (CollectionUtils.isEmpty(values))
+        {
+            return;
+        }
+
+        List<Object> rows = this.getRow(row);
+        if (CollectionUtils.isEmpty(rows))
+        {
+            return;
+        }
+
+        int cc = this.getColumnCount();
+        if (values.size() < cc)
+        {
+            return;
+        }
+
+        for (int col = 0; col < cc; col++)
+        {
+            Object value = values.get(col);
+            rows.set(col, value);
+        }
+        fireTableDataChanged();
+    }
+
     public boolean isCellEditable(int row, int col)
     {
-        return true;
+        return editable;
+    }
+
+    public void setCellEditable(boolean editable)
+    {
+        this.editable = editable;
     }
 
     public Class<?> getColumnClass(int c)
@@ -175,8 +209,10 @@ public class TabModel extends AbstractTableModel
 
     public String getRowKey(int row)
     {
+        List<Object> data = this.getRow(row);
+        int histId = Integer.parseInt(data.get(0) + "");
         List<String> keyLst = new ArrayList<String>(tabData.keySet());
-        return keyLst.get(row);
+        return keyLst.get(histId - 1);
     }
 
     public void deleteRow(int... rows)

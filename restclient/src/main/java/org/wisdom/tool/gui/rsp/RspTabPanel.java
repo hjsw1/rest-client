@@ -34,7 +34,7 @@ import org.wisdom.tool.gui.common.TabModel;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-22 PM 10:42:57 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class RspTabPanel extends JPanel
 {
@@ -73,7 +73,7 @@ public class RspTabPanel extends JPanel
         tabMdl = new TabModel(colNames);
         tab = new JTable(tabMdl);
         tab.setFillsViewportHeight(true);
-        tab.setAutoCreateRowSorter(true);
+        tab.setAutoCreateRowSorter(false);
         tab.getTableHeader().setReorderingAllowed(false);
         
         JPanel pnlNorth = new JPanel();

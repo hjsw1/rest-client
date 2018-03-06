@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-22 PM 10:42:57 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class HttpHists implements Serializable
 {
@@ -72,24 +72,13 @@ public class HttpHists implements Serializable
             return;
         }
 
-        Object asrt = true;
         Object dscr = null;
-        
         this.hists = new ArrayList<HttpHist>();
-        
-        Map<String, Object> asrtCols = RESTView.getView().getHistView().getTabMdl().getColumn(6);
         Map<String, Object> dscrCols = RESTView.getView().getHistView().getTabMdl().getColumn(5);
         
         for (HttpHist h : histLst)
         {
             HttpHist hist = new HttpHist(h);
-
-            // Update assert body field
-            asrt = asrtCols.get(hist.getKey());
-            if (null != asrt && asrt instanceof Boolean)
-            {
-                hist.setAssertBdy((Boolean) asrt);
-            }
 
             // Update description field
             dscr = dscrCols.get(hist.getKey());

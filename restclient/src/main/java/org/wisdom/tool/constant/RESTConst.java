@@ -147,6 +147,14 @@ public class RESTConst
 
     public static final String HTTP_RESPONSE = "HTTP Response";
 
+    public static final String HTTP_REQ_HEADER = "HTTP Request Header";
+
+    public static final String HTTP_REQ_BODY = "HTTP Request Body";
+
+    public static final String HTTP_REP_BODY = "HTTP Response Body";
+
+    public static final String HTTP_STATUS = "HTTP Status";
+
     public static final String REST_CLIENT = "HTTP RESTClient";
 
     public static final String HTTP_HISTORY = "HTTP History";
@@ -223,6 +231,8 @@ public class RESTConst
 
     public static final String HDR_TAG = "-- HEADERS  --";
 
+    public static final String CKI_TAG = "-- COOKIE  --";
+    
     public static final String BDY_TAG = "--   BODY   --";
 
     public static final String CONTENT_LEN = "Content-Length";
@@ -287,7 +297,7 @@ public class RESTConst
 
     public final static String TLS = "TLS";
 
-    public final static String OK = "Ok";
+    public final static String OK = "OK";
 
     public final static int TIME_OUT = 120000;
 
@@ -352,4 +362,48 @@ public class RESTConst
     public static final String MSG_REPORT_ISSUE = "Please visit\n\"" + RESTConst.URL_ISSUE + "\"\nto report issue.";
 
     public static final String MSG_HELP_FILE = "Please see \"" + RESTConst.HELP_FILE + "\" for the help contents.";
+
+    public static final String CONFIG = "Configure";
+
+    public final static String EXCLUDE_NODE = "Exclude each selected node";
+
+    public final static String JSON_VIEWER = "JSON Viewer";
+
+    public final static String ASSERT_REPBODY = "Assert HTTP Response Body";
+
+    public final static int DIALOG_WIDTH = 500;
+
+    public final static int DIALOG_HEIGHT = 400;
+
+    public final static String JSON = "JSON";
+
+    public final static String HIST_DETAIL = "History Detail";
+
+    public static final int METHOD_FIELD_SIZE = 5;
+
+    public static final int HIST_AREA_ROWS = 5;
+
+    public final static int HIST_HEADER_WIDTH = 250;
+
+    public final static int HIST_HEADER_HEIGHT = 100;
+
+    public final static int HIST_FRAME_WIDTH = 725;
+
+    public final static int HIST_FRAME_HEIGHT = 500;
+
+    public final static int MAIN_FRAME_WIDTH = 725;
+
+    public final static int MAIN_FRAME_HEIGHT = 600;
+
+    public final static String VIEWER = "Viewer";
+
+    public final static String TEXT = "Text";
+
+    public final static String EXPAND_ALL = "Expand All";
+
+    public final static String COLLAPSE_ALL = "Collapse All";
+
+    public final static String NEW_HDR = "New " + HEADER;
+
+    public final static String REFRESH = "Refresh";
 }

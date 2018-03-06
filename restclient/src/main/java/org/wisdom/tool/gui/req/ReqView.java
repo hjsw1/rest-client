@@ -48,7 +48,7 @@ import org.wisdom.tool.thread.RESTThd;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-22 PM 10:42:57 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class ReqView extends JPanel implements ActionListener
 {
@@ -226,10 +226,10 @@ public class ReqView extends JPanel implements ActionListener
         pnlBody.getCbCharset().setSelectedItem(charset);
 
         // Set headers
+        pnlHdr.getTabMdl().clear();
         Map<String, String> hdrs = req.getHeaders();
         if (MapUtils.isNotEmpty(hdrs))
         {
-            pnlHdr.getTabMdl().clear();
             for (Entry<String, String> e : hdrs.entrySet())
             {
                 if (RESTConst.CONTENT_TYPE.equalsIgnoreCase(e.getKey()))
@@ -247,10 +247,10 @@ public class ReqView extends JPanel implements ActionListener
         }
 
         // Set cookies
+        pnlCookie.getTabMdl().clear();
         Map<String, String> cks = req.getCookies();
         if (MapUtils.isNotEmpty(cks))
         {
-            pnlCookie.getTabMdl().clear();
             for (Entry<String, String> e : cks.entrySet())
             {
                 pnlCookie.getTabMdl().insertRow(e.getKey(), e.getValue());

@@ -16,6 +16,8 @@
 package org.wisdom.tool.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-22 PM 10:42:57 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class HttpHist implements Serializable
 {
@@ -68,6 +70,11 @@ public class HttpHist implements Serializable
      */
     private String cause;
 
+    /**
+     * Excluded nodes
+     */
+    private List<String> excludedNodes;
+
     public HttpHist()
     {
         this.assertBdy = true;
@@ -79,6 +86,18 @@ public class HttpHist implements Serializable
         this.req = req;
         this.rsp = rsp;
         this.assertBdy = true;
+    }
+
+    public HttpHist(String key, HttpHist hist)
+    {
+        this.key = key;
+        this.req = hist.getReq();
+        this.rsp = hist.getRsp();
+        this.assertBdy = hist.getAssertBdy();
+        this.descr = hist.getDescr();
+        this.result = hist.getResult();
+        this.cause = hist.getCause();
+        this.excludedNodes = hist.getExcludedNodes();
     }
 
     public HttpHist(HttpHist hist)
@@ -94,6 +113,7 @@ public class HttpHist implements Serializable
         {
             this.descr = hist.getDescr();
         }
+        this.excludedNodes = hist.getExcludedNodes();
     }
 
     public String getKey()
@@ -166,6 +186,28 @@ public class HttpHist implements Serializable
         this.descr = descr;
     }
 
+    public List<String> getExcludedNodes()
+    {
+        return excludedNodes;
+    }
+
+    public void setExcludedNodes(List<String> nodes)
+    {
+        this.excludedNodes = nodes;
+    }
+
+    public List<Object> toRow(Object histId)
+    {
+        List<Object> data = new ArrayList<Object>();
+        data.add(histId);
+        data.add(this.req.getMethod() + " " + req.getUrl());
+        data.add(this.rsp.getStatus());
+        data.add(this.rsp.getDate());
+        data.add(this.rsp.getTime() + "ms");
+        data.add(this.descr);
+        return data;
+    }
+
     @Override
     public String toString()
     {
@@ -184,7 +226,10 @@ public class HttpHist implements Serializable
         builder.append(result);
         builder.append(", cause=");
         builder.append(cause);
+        builder.append(", excludedNodes=");
+        builder.append(excludedNodes);
         builder.append("]");
         return builder.toString();
     }
+
 }

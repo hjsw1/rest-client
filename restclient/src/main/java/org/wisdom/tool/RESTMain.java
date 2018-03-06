@@ -96,7 +96,7 @@ public class RESTMain
         frame.setVisible(true);
         frame.addWindowListener(wa);
         frame.setIconImage(UIUtil.getImage(RESTConst.LOGO));
-        frame.setMinimumSize(new Dimension(720, 600));
+        frame.setMinimumSize(new Dimension(RESTConst.MAIN_FRAME_WIDTH, RESTConst.MAIN_FRAME_HEIGHT));
         UIUtil.setLocation(frame);
     }
 

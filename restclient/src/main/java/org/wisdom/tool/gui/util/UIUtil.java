@@ -35,6 +35,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTree;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -111,8 +112,7 @@ public class UIUtil
     * @return Map<String,String>
     * @throws
      */
-    public static Map<String, String> getValuePair(
-            Collection<List<Object>> values)
+    public static Map<String, String> getValuePair(Collection<List<Object>> values)
     {
         Map<String, String> valMap = new LinkedHashMap<String, String>();
         if (CollectionUtils.isEmpty(values))
@@ -380,7 +380,7 @@ public class UIUtil
      */
     public static void setHistTabWidth(JTable tab)
     {
-        int width[] = { 35, 195, 81, 144, 50, 80, -1 };
+        int width[] = { 35, 260, 81, 144, 50, 80 };
         TableColumnModel cols = tab.getColumnModel();
         for (int i = 0; i < width.length; i++)
         {
@@ -448,21 +448,10 @@ public class UIUtil
             return;
         }
 
-        Object asrt = true;
         Object dscr = null;
-        
-        Map<String, Object> asrtCols = RESTView.getView().getHistView().getTabMdl().getColumn(6);
         Map<String, Object> dscrCols = RESTView.getView().getHistView().getTabMdl().getColumn(5);
-        
         for (HttpHist h : RESTCache.getHists().values())
         {
-            // Update assert body field
-            asrt = asrtCols.get(h.getKey());
-            if (null != asrt && asrt instanceof Boolean)
-            {
-                h.setAssertBdy((Boolean) asrt);
-            }
-
             // Update description field
             dscr = dscrCols.get(h.getKey());
             if (null != dscr)
@@ -575,8 +564,7 @@ public class UIUtil
                          rsp.getStatus(), 
                          rsp.getDate(), 
                          rsp.getTime() + "ms",
-                         e.getValue().getDescr(), 
-                         e.getValue().getAssertBdy());
+                         e.getValue().getDescr());
 
             RESTCache.getHists().put(key, e.getValue());
             i++;
@@ -600,6 +588,120 @@ public class UIUtil
                                           msg, 
                                           title, 
                                           JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    /**
+    * 
+    * @Title      : getSelectedHist 
+    * @Description: Get first selected history case 
+    * @Param      : @param tab
+    * @Param      : @param tabMdl
+    * @Param      : @return 
+    * @Return     : String
+    * @Throws     :
+     */
+    public static HttpHist getSelectedHist(JTable tab, TabModel tabMdl)
+    {
+        HttpHist hist = null;
+        int row = tab.getSelectedRow();
+        if (row < 0)
+        {
+            return hist;
+        }
+
+        String key = tabMdl.getRowKey(row);
+        hist = RESTCache.getHists().get(key);
+        return hist;
+    }
+
+    /**
+    * 
+    * @Title      : setSelectedHist 
+    * @Description: Set first selected history case  
+    * @Param      : @param hist
+    * @Param      : @param tab
+    * @Param      : @param tabMdl 
+    * @Return     : void
+    * @Throws     :
+     */
+    public static void setSelectedHist(HttpHist hist, JTable tab, TabModel tabMdl)
+    {
+        if (null == hist)
+        {
+            return;
+        }
+
+        int row = tab.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        List<Object> rowData = tabMdl.getRow(row);
+        List<Object> values = hist.toRow(rowData.get(0));
+        tabMdl.setRowValues(values, row);
+    }
+
+    /**
+    * 
+    * @Title      : refreshHistView 
+    * @Description: TODO 
+    * @Param      : @param hs
+    * @Param      : @param tabMdl 
+    * @Return     : void
+    * @Throws     :
+     */
+    public static void refreshHistView(Collection<HttpHist> hs, TabModel tabMdl)
+    {
+        if (CollectionUtils.isEmpty(hs))
+        {
+            return;
+        }
+
+        List<HttpHist> hists = new ArrayList<HttpHist>(hs);
+        for (int row = 0; row < hists.size(); row++)
+        {
+            List<Object> rowData = tabMdl.getRow(row);
+            if (CollectionUtils.isEmpty(rowData))
+            {
+                continue;
+            }
+            HttpHist hist = hists.get(row);
+            List<Object> values = hist.toRow(rowData.get(0));
+            tabMdl.setRowValues(values, row);
+        }
+    }
+    
+    /**
+    * 
+    * @Title      : expand 
+    * @Description: Expand tree nodes
+    * @Param      : @param tree 
+    * @Return     : void
+    * @Throws     :
+     */
+    public static void expand(JTree tree)
+    {
+        for (int r = 0; r < tree.getRowCount(); r++)
+        {
+            tree.expandRow(r);
+        }
+    }
+
+    /**
+    * 
+    * @Title      : collapse 
+    * @Description: Collapse tree nodes
+    * @Param      : @param tree 
+    * @Return     : void
+    * @Throws     :
+     */
+    public static void collapse(JTree tree)
+    {
+        for (int r = 0; r < tree.getRowCount(); r++)
+        {
+            tree.collapseRow(r);
         }
     }
 }

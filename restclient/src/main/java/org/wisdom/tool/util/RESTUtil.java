@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -744,7 +745,23 @@ public class RESTUtil
             return;
         }
 
-        if (!oldBdy.equals(newBdy))
+        boolean isFailed = false;
+        if (isJson(oldBdy))
+        {
+            if (!diff(oldBdy, newBdy, hist.getExcludedNodes()))
+            {
+                isFailed = true;
+            }
+        }
+        else
+        {
+            if (!oldBdy.equals(newBdy))
+            {
+                isFailed = true;
+            }
+        }
+
+        if (isFailed)
         {
             hist.setResult(Results.FAILURE);
             cs = RESTUtil.getCause(ErrCode.INCONSISTENT_BODY);
@@ -1165,5 +1182,89 @@ public class RESTUtil
         {
             // Ignore this exception
         }
+    }
+    
+    /**
+    * 
+    * @Title      : excludeNode 
+    * @Description: Exclude JSON nodes 
+    * @Param      : @param e
+    * @Param      : @param path
+    * @Param      : @param exclNodes, nodes to be excluded 
+    * @Return     : void
+    * @Throws     :
+     */
+    private static void jsonTree(JsonElement e, String path, List<String> exclNodes)
+    {
+        if (e.isJsonNull())
+        {
+            return;
+        }
+
+        if (e.isJsonPrimitive())
+        {
+            return;
+        }
+
+        if (e.isJsonArray())
+        {
+            JsonArray ja = e.getAsJsonArray();
+            if (null != ja)
+            {
+                for (JsonElement ae : ja)
+                {
+                    jsonTree(ae, path, exclNodes);
+                }
+            }
+            return;
+        }
+
+        if (e.isJsonObject())
+        {
+            Map<String, JsonElement> tm = new LinkedHashMap<String, JsonElement>();
+            for (Entry<String, JsonElement> en : e.getAsJsonObject().entrySet())
+            {
+                tm.put(en.getKey(), en.getValue());
+            }
+
+            for (Entry<String, JsonElement> en : tm.entrySet())
+            {
+                String nodeKey = path + "|" + en.getKey();
+                if (CollectionUtils.isNotEmpty(exclNodes) && exclNodes.contains(nodeKey))
+                {
+                    e.getAsJsonObject().remove(en.getKey());
+                    continue;
+                }
+                jsonTree(en.getValue(), nodeKey, exclNodes);
+            }
+        }
+    }
+    
+    /**
+    * 
+    * @Title      : diff 
+    * @Description: Differ JSON nodes 
+    * @Param      : @param json1
+    * @Param      : @param json2
+    * @Param      : @param excludedNodes
+    * @Param      : @return 
+    * @Return     : boolean
+    * @Throws     :
+     */
+    public static boolean diff(String json1, String json2, List<String> exclNodes)
+    {
+        if (CollectionUtils.isEmpty(exclNodes))
+        {
+            return json1.equals(json2);
+        }
+
+        JsonParser p = new JsonParser();
+        JsonElement e1 = p.parse(json1);
+        JsonElement e2 = p.parse(json2);
+
+        jsonTree(e1, "", exclNodes);
+        jsonTree(e2, "", exclNodes);
+
+        return e1.equals(e2);
     }
 }
