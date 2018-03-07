@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-25 PM 7:58:51 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class Cause implements Serializable
 {

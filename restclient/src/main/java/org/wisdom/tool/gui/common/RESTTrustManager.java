@@ -27,7 +27,7 @@ import javax.net.ssl.X509TrustManager;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: Jul 26, 2017 5:32:58 PM 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class RESTTrustManager implements TrustManager, X509TrustManager
 {

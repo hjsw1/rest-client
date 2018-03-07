@@ -483,6 +483,7 @@ public class MenuBarView implements ActionListener, PropertyChangeListener
             }
         }
     }
+
     public void actionPerformed(ActionEvent e)
     {
         JMenuItem item = (JMenuItem) (e.getSource());

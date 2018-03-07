@@ -46,7 +46,7 @@ public class RESTCache
     private static Causes cs = null;
 
     /**
-     * If it's CLI running
+     * Check if it's CLI running
      */
     private static boolean isCLIRunning;
 

@@ -21,7 +21,7 @@ package org.wisdom.tool.model;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2016-12-18 PM 3:30:01 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public enum Results
 {

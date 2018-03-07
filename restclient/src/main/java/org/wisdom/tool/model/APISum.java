@@ -25,7 +25,7 @@ import org.wisdom.tool.apidoc.APIUtil;
 * @Author: Yudong (Dom) Wang
 * @Email: wisdomtool@outlook.com 
 * @Date: 2017-07-22 PM 10:42:57 
-* @Version: WisdomTool RESTClient V1.1 
+* @Version: WisdomTool RESTClient V1.2 
 */
 public class APISum implements Serializable
 {
