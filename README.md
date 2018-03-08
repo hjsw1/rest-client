@@ -51,7 +51,7 @@ _**E-mail**: wisdomtool@outlook.com_
 
 If the **WisdomTool REST Client** helps you a lot, and you would like to support this tool's further development and the continuous maintenance of this tool. You can sweep the following QR code free to donate me, which asked me to have a cup of tea or coffee. Your donation is highly appreciated. **♥ Thank you ♥** <br/>
 
-[ **♥ Donate by PayPal ♥** ](https://www.paypal.me/WisdomTool), by Alipay, WeChat Pay.
+[**♥ Donate ♥ by PayPal**](https://www.paypal.me/WisdomTool) , Alipay, WeChat Pay
 
 ![Donate by pay](https://github.com/wisdomtool/rest-client/blob/master/images/donate_pay.png)
 
